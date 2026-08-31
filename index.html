@@ -3,830 +3,524 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olha Vilkhova — Applikationsentwicklerin</title>
-  <meta name="description" content="Portfolio von Olha Vilkhova — angehende Applikationsentwicklerin, IMS Kantonsschule am Brühl, St. Gallen. Sucht ein Jahrespraktikum ab August 2027.">
+  <title>Olha Vilkhova — Portfolio</title>
+  <meta name="description" content="Portfolio von Olha Vilkhova — Applikationsentwicklerin, IMS Kantonsschule am Brühl, St. Gallen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #FAFAF8;
-      --text: #111113;
-      --text-2: #44444C;
-      --text-3: #757580;
-      --accent: #C4453C;
-      --accent-light: #F5E6E4;
-      --border: #E5E2DE;
-      --heading: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --sans: 'IBM Plex Sans', system-ui, sans-serif;
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.09);
+      --text: #f2f2f2;
+      --text2: #888888;
+      --text3: #444444;
+      --accent: #ffffff;
+      --mono: 'DM Mono', monospace;
+      --sans: 'Inter', system-ui, sans-serif;
     }
 
-    [data-theme="dark"] {
-      --bg: #0E0F12;
-      --text: #F4F4F6;
-      --text-2: #B0B0BB;
-      --text-3: #70707D;
-      --accent: #E55347;
-      --accent-light: rgba(229, 83, 71, 0.15);
-      --border: #23242A;
-    }
+    html { scroll-behavior: smooth; font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-    html {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.7;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body { overflow-x: hidden; }
-
-    /* ── Layout ── */
-    .page {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    /* ── Header ── */
-    .header {
-      padding: 48px 0 0;
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header-name {
-      font-family: var(--heading);
-      font-weight: 800;
-      font-size: clamp(34px, 6.5vw, 54px);
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      color: var(--text);
-      transition: color 0.3s ease;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .header-contact {
-      font-size: 14px;
-      color: var(--text-3);
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .header-contact a {
-      color: var(--text-3);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .header-contact a:hover { color: var(--accent); }
-
-    /* Theme Toggle Switch */
-    .theme-toggle {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background-color 0.2s, transform 0.2s;
-      flex-shrink: 0;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: scale(1.06);
-    }
-
-    .sun-icon { display: none; }
-    .moon-icon { display: block; }
-
-    [data-theme="dark"] .sun-icon { display: block; }
-    [data-theme="dark"] .moon-icon { display: none; }
-
-    .red-line {
-      width: 64px;
-      height: 2px;
-      background: var(--accent);
-      margin: 24px 0;
-    }
-
-    .header-subtitle {
-      font-size: 15px;
-      color: var(--text-2);
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      transition: color 0.3s ease;
-    }
-
-    /* ── Intro (About + Photo) ── */
-    .intro {
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 48px;
-      align-items: start;
-      padding: 56px 0 0;
-    }
-
-    .intro-text {
-      font-size: 17px;
-      line-height: 1.75;
-      color: var(--text-2);
-      border-left: 2px solid var(--accent);
-      padding-left: 24px;
-      transition: color 0.3s ease;
-    }
-
-    .portrait-wrap {
-      position: relative;
-    }
-
-    .portrait-wrap img {
-      width: 100%;
-      display: block;
-      filter: grayscale(15%);
-      transition: filter 0.5s ease;
-      border-radius: 2px;
-    }
-
-    .portrait-wrap:hover img {
-      filter: grayscale(0%);
-    }
-
-    .portrait-accent {
-      position: absolute;
-      top: 12px;
-      left: -8px;
-      right: 8px;
-      bottom: -12px;
-      border: 1px solid var(--accent);
+    /* Ambient Background Effects */
+    /* Ambient Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
-      z-index: -1;
-      border-radius: 2px;
-    }
-
-    /* ── Sections ── */
-    .section {
-      padding: 72px 0 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-
-    .section-num {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
-    }
-
-    .section-title {
-      font-family: var(--heading);
-      font-weight: 700;
-      font-size: 26px;
-      letter-spacing: -0.015em;
-      color: var(--text);
-      line-height: 1.2;
-      transition: color 0.3s ease;
-    }
-
-    .section-line {
-      height: 1px;
-      background: var(--border);
-      margin-top: 12px;
-      transition: background-color 0.3s ease;
-    }
-
-    /* ── Timeline ── */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .tl-entry {
-      display: grid;
-      grid-template-columns: 160px 24px 1fr;
-      gap: 0;
-      min-height: 72px;
-    }
-
-    .tl-date {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-3);
-      padding-top: 2px;
-      text-align: right;
-      padding-right: 20px;
-    }
-
-    .tl-marker {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .tl-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 7px;
-    }
-
-    .tl-line {
-      width: 1px;
-      flex: 1;
-      background: var(--border);
-      margin-top: 6px;
-      transition: background-color 0.3s ease;
-    }
-
-    .tl-content {
-      padding: 0 0 32px 20px;
-    }
-
-    .tl-title {
-      font-family: var(--heading);
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--text);
-      margin-bottom: 2px;
-      transition: color 0.3s ease;
-    }
-
-    .tl-role {
-      font-size: 14px;
-      color: var(--text-2);
-      font-style: italic;
-    }
-
-    .tl-desc {
-      font-size: 14px;
-      color: var(--text-3);
-      margin-top: 4px;
-    }
-
-    /* ── Projects ── */
-    .projects {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .project {
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.3s ease;
-    }
-
-    .project:first-child { padding-top: 0; }
-    .project:last-child { border-bottom: none; }
-
-    .project-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 8px;
-    }
-
-    .project-name {
-      font-family: var(--heading);
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      transition: color 0.3s ease;
-    }
-
-    .project-link {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .project-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .project-link:hover::after { width: 100%; }
-
-    .project-subtitle {
-      font-size: 14px;
-      color: var(--text-3);
-      margin-bottom: 12px;
-    }
-
-    .project-desc {
-      font-size: 15px;
-      color: var(--text-2);
-      line-height: 1.7;
-      margin-bottom: 16px;
-      transition: color 0.3s ease;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tech-tag {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-3);
-      background: transparent;
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.02em;
-      transition: border-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* ── Skills ── */
-    .skills-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .skill-row {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 24px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.3s ease;
-    }
-
-    .skill-row:last-child { border-bottom: none; }
-
-    .skill-cat {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-3);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding-top: 1px;
-    }
-
-    .skill-items {
-      font-size: 15px;
-      color: var(--text-2);
-      transition: color 0.3s ease;
-    }
-
-    /* ── Motivation ── */
-    .motivation-text {
-      font-size: 17px;
-      line-height: 1.8;
-      color: var(--text-2);
-      max-width: 640px;
-      transition: color 0.3s ease;
-    }
-
-    /* ── Contact ── */
-    .contact-content {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .contact-email {
-      font-family: var(--heading);
-      font-weight: 700;
-      font-size: 24px;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .contact-email::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .contact-email:hover::after { width: 100%; }
-
-    .contact-note {
-      font-size: 14px;
-      color: var(--text-3);
-      margin-top: 12px;
-    }
-
-    /* ── Footer ── */
-    .footer {
-      padding: 72px 0 40px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-3);
-    }
-
-    .footer-line {
-      height: 1px;
-      background: var(--border);
-      margin-bottom: 24px;
-      transition: background-color 0.3s ease;
-    }
-
-    /* ── Scroll Reveal ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .reveal.visible {
+      z-index: 0;
       opacity: 1;
-      transform: translateY(0);
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .page { padding: 0 20px; }
-      .header { padding-top: 32px; }
+    header, section, footer, nav { position: relative; z-index: 1; }
 
-      .header-top {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 16px;
-      }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text3); }
 
-      .header-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .header-contact { text-align: left; }
-
-      .header-name { font-size: clamp(34px, 9vw, 46px); }
-
-      .intro {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding-top: 40px;
-      }
-
-      .portrait-wrap {
-        max-width: 240px;
-        order: -1;
-      }
-
-      .tl-entry {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .tl-date {
-        text-align: left;
-        padding-right: 0;
-        padding-left: 0;
-      }
-
-      .tl-marker { display: none; }
-
-      .tl-content {
-        padding: 4px 0 28px 0;
-        border-left: 2px solid var(--accent);
-        padding-left: 16px;
-      }
-
-      .skill-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
-      }
-
-      .project-top {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .section { padding-top: 48px; }
-
-      .contact-email { font-size: 18px; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 64px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
+    .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--text2); text-decoration: none; letter-spacing: 0.06em; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 12px; color: var(--text3); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { font-size: 12px; font-family: var(--mono); padding: 8px 20px; border: 1px solid var(--text3); color: var(--text2); text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+    .nav-cta:hover { border-color: var(--text); color: var(--text); }
 
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 64px 80px; max-width: 1200px; margin: 0 auto;
+    }
+    .hero-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 28px; }
+    .hero-name { font-size: clamp(64px, 10vw, 140px); font-weight: 300; line-height: 0.9; letter-spacing: -0.03em; color: var(--text); }
+    .hero-name strong { font-weight: 600; }
+    .hero-divider { width: 48px; height: 1px; background: var(--text3); margin: 36px 0; }
+    .hero-role { font-size: 16px; font-weight: 300; color: var(--text2); max-width: 480px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 12px; margin-top: 48px; flex-wrap: wrap; }
+    .btn-fill { padding: 12px 28px; background: var(--text); color: var(--bg); font-size: 13px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+    .btn-fill:hover { opacity: 0.8; }
+    .btn-ghost { padding: 12px 28px; border: 1px solid var(--border); color: var(--text2); font-size: 13px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
+
+    section { position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+    .section-pad { padding: 120px 0; }
+
+    .label { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 48px; display: flex; align-items: center; gap: 16px; }
+    .label::before { content: ''; width: 32px; height: 1px; background: var(--text3); }
+
+    .section-heading { font-size: clamp(32px, 4.5vw, 56px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 72px; }
+    .section-heading em { font-style: normal; font-weight: 600; color: var(--text); }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 400px; gap: 100px; align-items: start; }
+    .about-text { font-size: 16px; font-weight: 300; color: var(--text2); line-height: 1.85; }
+    .about-text p + p { margin-top: 20px; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    .about-img { position: relative; }
+    .about-img img { width: 100%; display: block; filter: grayscale(100%) contrast(1.1); transition: filter 0.6s; }
+    .about-img:hover img { filter: grayscale(60%) contrast(1.05); }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 64px; }
+    .stat { background: var(--bg); padding: 24px 20px; text-align: center; }
+    .stat-num { font-size: 40px; font-weight: 300; color: var(--text); letter-spacing: -0.02em; }
+    .stat-lbl { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+
+    /* Timeline */
+    .tl { border-top: 1px solid var(--border); }
+    .tl-row { display: grid; grid-template-columns: 200px 1fr; gap: 0; border-bottom: 1px solid var(--border); padding: 32px 0; align-items: start; transition: background 0.2s; }
+    .tl-row:hover { background: var(--surface); }
+    .tl-date { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.06em; padding-top: 4px; }
+    .tl-body {}
+    .tl-name { font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .tl-role { font-size: 13px; color: var(--text3); margin-bottom: 6px; }
+    .tl-desc { font-size: 13px; color: var(--text3); font-weight: 300; }
+
+    /* Projects */
+    .proj-list { border-top: 1px solid var(--border); }
+    .proj-row {
+      display: grid; grid-template-columns: 48px 1fr auto;
+      gap: 32px; align-items: start;
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+      transition: background 0.2s;
+    }
+    .proj-row:hover { background: var(--surface); }
+    .proj-num { font-family: var(--mono); font-size: 11px; color: var(--text3); padding-top: 4px; }
+    .proj-name { font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .proj-sub { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.06em; margin-bottom: 14px; }
+    .proj-desc { font-size: 14px; color: var(--text2); line-height: 1.7; font-weight: 300; max-width: 560px; margin-bottom: 20px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border: 1px solid var(--border); color: var(--text3); letter-spacing: 0.05em; }
+    .proj-link { font-family: var(--mono); font-size: 12px; color: var(--text3); text-decoration: none; white-space: nowrap; padding-top: 4px; transition: color 0.2s; }
+    .proj-link:hover { color: var(--text); }
+
+    /* Skills */
+    .skills-table { border-top: 1px solid var(--border); }
+    .skill-row { display: grid; grid-template-columns: 200px 1fr; border-bottom: 1px solid var(--border); padding: 24px 0; align-items: start; }
+    .skill-cat { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 4px; }
+    .skill-vals { font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.6; }
+
+    /* Contact */
+    .contact-block { max-width: 700px; }
+    .contact-email { font-size: clamp(22px, 4vw, 44px); font-weight: 300; color: var(--text2); text-decoration: none; letter-spacing: -0.01em; display: inline-block; margin-bottom: 32px; transition: color 0.2s; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .contact-email:hover { color: var(--text); border-color: var(--text2); }
+    .contact-note { font-size: 14px; color: var(--text3); font-weight: 300; line-height: 1.7; margin-bottom: 40px; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .footer-text { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.06em; }
+    .footer-link { font-family: var(--mono); font-size: 11px; color: var(--text3); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+    .footer-link:hover { color: var(--text); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--text2); transition: transform 0.3s, opacity 0.3s; }
+
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .nav-mobile-open .nav-links {
+        display: flex; flex-direction: column;
+        position: fixed; inset: 0; background: var(--bg);
+        justify-content: center; align-items: center;
+        gap: 40px; z-index: 99;
+      }
+      .nav-mobile-open .nav-links a { font-size: 20px; }
+      .hero { padding: 0 24px 60px; }
+      .container { padding: 0 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-img { max-width: 280px; }
+      .tl-row { grid-template-columns: 1fr; gap: 8px; }
+      .proj-row { grid-template-columns: 1fr; gap: 12px; }
+      .proj-link { align-self: auto; }
+      .skill-row { grid-template-columns: 1fr; gap: 6px; }
+      .section-pad { padding: 80px 0; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
     @media (max-width: 480px) {
-      .header-name { font-size: 30px; }
-      .intro-text { font-size: 15px; }
-      .section-title { font-size: 22px; }
-    }
-
-    /* ── Print ── */
-    @media print {
-      .reveal { opacity: 1; transform: none; }
-      .portrait-accent, .theme-toggle { display: none; }
-      .section { padding-top: 36px; }
-      .page { max-width: 100%; }
+      .hero-name { font-size: 52px; }
+      .stats { grid-template-columns: 1fr; }
+      .btn-fill, .btn-ghost { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <canvas id="bg-canvas"></canvas>
 
-    <!-- Header -->
-    <header class="header" id="top">
-      <div class="header-top">
-        <h1 class="header-name">Olha Vilkhova</h1>
-        <div class="header-right">
-          <div class="header-contact">
-            <a href="mailto:olha.vilkhova47@gmail.com">olha.vilkhova47@gmail.com</a>
+  <nav id="nav">
+    <a href="#" class="nav-logo">OV.DEV</a>
+    <ul class="nav-links">
+      <li><a href="#ueber">Über mich</a></li>
+      <li><a href="#werdegang">Werdegang</a></li>
+      <li><a href="#projekte">Projekte</a></li>
+      <li><a href="#kenntnisse">Skills</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="mailto:olha.vilkhova47@gmail.com" class="nav-cta">Kontakt</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow reveal">St. Gallen, Schweiz — Applikationsentwicklerin</div>
+    <h1 class="hero-name reveal">Olha<br><strong>Vilkhova</strong></h1>
+    <div class="hero-divider reveal"></div>
+    <p class="hero-role reveal">
+      Angehende Applikationsentwicklerin an der IMS Kantonsschule am Brühl.<br>
+      Sucht ein Jahrespraktikum ab August 2027.
+    </p>
+    <div class="hero-btns reveal">
+      <a href="#projekte" class="btn-fill">Projekte ansehen</a>
+      <a href="#kontakt" class="btn-ghost">Kontakt aufnehmen</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="ueber">
+    <div class="container section-pad">
+      <div class="label reveal">01 / Über mich</div>
+      <div class="about-grid">
+        <div class="reveal">
+          <h2 class="section-heading">Kreativ. Präzise.<br><em>Fokussiert.</em></h2>
+          <div class="about-text">
+            <p>Vor vier Jahren verliess ich die Ukraine und fand in <strong>St. Gallen</strong> eine neue Heimat. In der Informatik entdeckte ich eine Leidenschaft, bei der mathematische Logik und gestalterische Kreativität perfekt verschmelzen.</p>
+            <p>Heute entwickle ich moderne Webanwendungen, beschäftige mich intensiv mit <strong>KI-Integration</strong> und organisiere die jährlichen «Notebookdays» für neue Schülerinnen und Schüler an meiner Schule.</p>
           </div>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Night Mode umschalten" title="Design umschalten (Light / Dark)">
-            <svg class="moon-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          </button>
+          <div class="stats reveal">
+            <div class="stat"><div class="stat-num">4.6</div><div class="stat-lbl">Notenschnitt</div></div>
+            <div class="stat"><div class="stat-num">3+</div><div class="stat-lbl">Projekte</div></div>
+            <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Sprachen</div></div>
+          </div>
+        </div>
+        <div class="about-img reveal">
+          <img src="assets/photo_2026-08-20_11-53-44.jpg" alt="Olha Vilkhova" loading="lazy">
         </div>
       </div>
-      <div class="red-line"></div>
-      <p class="header-subtitle">Angehende Applikationsentwicklerin · IMS Kantonsschule am Brühl, St. Gallen</p>
-    </header>
+    </div>
+  </section>
 
-    <!-- Intro: About + Portrait -->
-    <section class="intro reveal" id="ueber">
-      <div class="intro-text">
-        Vor vier Jahren hat sich mein Leben durch den Krieg verändert — ich verliess die Ukraine und fand in St. Gallen eine neue Heimat. Die Informatik wurde für mich mehr als ein Schulfach: Sie gab mir einen Ort, an dem Konzentration und Kreativität zusammenkommen. Heute entwickle ich eigene Webanwendungen, experimentiere mit KI-Integration und suche ab August 2027 ein Jahrespraktikum als Applikationsentwicklerin.
-      </div>
-      <div class="portrait-wrap">
-        <img src="assets/portrait.jpg" alt="Olha Vilkhova" width="280" height="286" loading="eager">
-        <div class="portrait-accent"></div>
-      </div>
-    </section>
-
-    <!-- 01 Werdegang -->
-    <section class="section reveal" id="werdegang">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2 class="section-title">Werdegang</h2>
-      </div>
-      <div class="section-line"></div>
-
-      <div class="timeline" style="margin-top: 32px;">
-
-        <div class="tl-entry">
-          <div class="tl-date">2024 – heute</div>
-          <div class="tl-marker"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">IMS Kantonsschule am Brühl</div>
+  <!-- TIMELINE -->
+  <section id="werdegang">
+    <div class="container section-pad">
+      <div class="label reveal">02 / Werdegang</div>
+      <h2 class="section-heading reveal">Ausbildung & <em>Erfahrung</em></h2>
+      <div class="tl">
+        <div class="tl-row reveal">
+          <div class="tl-date">2024 – HUTE</div>
+          <div class="tl-body">
+            <div class="tl-name">IMS Kantonsschule am Brühl</div>
             <div class="tl-role">Informatikerin Applikationsentwicklung</div>
             <div class="tl-desc">Notendurchschnitt 4.6 · Definitiv promoviert · 0 ungenügende Noten</div>
           </div>
         </div>
-
-        <div class="tl-entry">
-          <div class="tl-date">Sept – Okt 2025</div>
-          <div class="tl-marker"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">Smartfeld</div>
+        <div class="tl-row reveal">
+          <div class="tl-date">SEPT – OKT 2025</div>
+          <div class="tl-body">
+            <div class="tl-name">Smartfeld</div>
             <div class="tl-role">Praktikum</div>
-            <div class="tl-desc">KI-Kurse für Jugendliche mitgeplant und durchgeführt</div>
+            <div class="tl-desc">Vorbereitung und Durchführung von KI-Kursen für Jugendliche</div>
           </div>
         </div>
-
-        <div class="tl-entry">
-          <div class="tl-date">Sept – Okt 2025</div>
-          <div class="tl-marker"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">FirstMedia Solutions GmbH</div>
+        <div class="tl-row reveal">
+          <div class="tl-date">SEPT – OKT 2025</div>
+          <div class="tl-body">
+            <div class="tl-name">FirstMedia Solutions GmbH</div>
             <div class="tl-role">Praktikum</div>
-            <div class="tl-desc">Social Media und Bearbeitung von Webseiten-Inhalten</div>
+            <div class="tl-desc">Social Media Management & Bearbeitung von Webcontent</div>
           </div>
         </div>
-
-        <div class="tl-entry">
+        <div class="tl-row reveal">
           <div class="tl-date">2023 – 2024</div>
-          <div class="tl-marker"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">Integrationskurs</div>
-            <div class="tl-role">Deutsch, St. Gallen</div>
+          <div class="tl-body">
+            <div class="tl-name">Integrationskurs Deutsch</div>
+            <div class="tl-role">Sprachausbildung (B2 Level)</div>
+            <div class="tl-desc">St. Gallen, Schweiz</div>
           </div>
         </div>
-
-        <div class="tl-entry">
+        <div class="tl-row reveal">
           <div class="tl-date">2014 – 2022</div>
-          <div class="tl-marker"><div class="tl-dot"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">Schule in der Ukraine</div>
+          <div class="tl-body">
+            <div class="tl-name">Schule in der Ukraine</div>
+            <div class="tl-role">Allgemeinbildung</div>
           </div>
         </div>
-
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 02 Projekte -->
-    <section class="section reveal" id="projekte">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title">Projekte</h2>
+  <!-- PROJECTS -->
+  <section id="projekte">
+    <div class="container section-pad">
+      <div class="label reveal">03 / Projekte</div>
+      <h2 class="section-heading reveal">Ausgewählte <em>Arbeiten</em></h2>
+      <div class="proj-list">
+        <div class="proj-row reveal">
+          <div class="proj-num">01</div>
+          <div>
+            <div class="proj-name">ChronoCoach</div>
+            <div class="proj-sub">KI-GESTÜTZTER LERNPLANER</div>
+            <div class="proj-desc">Webanwendung mit integriertem KI-Coach zur automatischen Generierung von strukturierten Lern- und Wochenplänen basierend auf persönlichen Energieleveln.</div>
+            <div class="proj-tags">
+              <span class="tag">REACT</span><span class="tag">JAVASCRIPT</span><span class="tag">REST API</span><span class="tag">GEMINI AI</span><span class="tag">VERCEL</span>
+            </div>
+          </div>
+          <a href="https://chronocoach-nine.vercel.app/" target="_blank" rel="noopener" class="proj-link">LIVE ↗</a>
+        </div>
+        <div class="proj-row reveal">
+          <div class="proj-num">02</div>
+          <div>
+            <div class="proj-name">Foto-Portfolio</div>
+            <div class="proj-sub">PERSÖNLICHE GALERIE-WEBSITE</div>
+            <div class="proj-desc">Minimalistische Fotoseite mit automatischer Bildsynchronisation und optimierter Kompression via Node.js Build-Skript.</div>
+            <div class="proj-tags">
+              <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JAVASCRIPT</span><span class="tag">NODE.JS</span><span class="tag">VERCEL</span>
+            </div>
+          </div>
+          <a href="https://my-photo-portfolio-olkus.vercel.app/" target="_blank" rel="noopener" class="proj-link">LIVE ↗</a>
+        </div>
+        <div class="proj-row reveal">
+          <div class="proj-num">03</div>
+          <div>
+            <div class="proj-name">Schul-Dokumentation</div>
+            <div class="proj-sub">TECHNISCHES REPOSITORY</div>
+            <div class="proj-desc">Umfassende Dokumentation von Unterrichtsinhalten der IMS-Module (SQL, UML, C# OOP, Datenmodellierung).</div>
+            <div class="proj-tags">
+              <span class="tag">GITLAB PAGES</span><span class="tag">MARKDOWN</span><span class="tag">STATIC SITE</span>
+            </div>
+          </div>
+          <a href="https://1fi_project.gitlab.io/162/" target="_blank" rel="noopener" class="proj-link">LIVE ↗</a>
+        </div>
       </div>
-      <div class="section-line"></div>
+    </div>
+  </section>
 
-      <div class="projects" style="margin-top: 8px;">
-
-        <div class="project">
-          <div class="project-top">
-            <h3 class="project-name">ChronoCoach</h3>
-            <a href="https://chronocoach-nine.vercel.app/" target="_blank" rel="noopener" class="project-link">Live ansehen &#8599;</a>
-          </div>
-          <div class="project-subtitle">KI-gestützter Lernplaner</div>
-          <p class="project-desc">
-            Studierende jonglieren zwischen Vorlesungen, Lernphasen und Freizeit — oft ohne strukturierten Plan. ChronoCoach ist eine Webanwendung mit integriertem KI-Coach, die per Chat personalisierte Wochenpläne erstellt, Lernzeiten nach dem Energielevel optimiert und den Fortschritt in Echtzeit verfolgt. Inklusive Wochenkalender, Tagesansicht, Aufgabenverwaltung und Onboarding-Flow.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">REST APIs</span>
-            <span class="tech-tag">Gemini / Claude</span>
-            <span class="tech-tag">Vercel</span>
-          </div>
+  <!-- SKILLS -->
+  <section id="kenntnisse">
+    <div class="container section-pad">
+      <div class="label reveal">04 / Skills</div>
+      <h2 class="section-heading reveal">Technische <em>Kompetenzen</em></h2>
+      <div class="skills-table">
+        <div class="skill-row reveal">
+          <div class="skill-cat">Web Frontend</div>
+          <div class="skill-vals">HTML5, CSS3, JavaScript (ES6+), TypeScript, Angular, React</div>
         </div>
-
-        <div class="project">
-          <div class="project-top">
-            <h3 class="project-name">Foto-Portfolio</h3>
-            <a href="https://my-photo-portfolio-olkus.vercel.app/" target="_blank" rel="noopener" class="project-link">Live ansehen &#8599;</a>
-          </div>
-          <div class="project-subtitle">Persönliche Galerie-Website</div>
-          <p class="project-desc">
-            Fotografie ist mein kreativer Ausgleich zur Programmierung. Für die Präsentation meiner Bilder habe ich eine eigene Galerie-Website entwickelt — mit automatischer Bildsynchronisation via Node.js-Script, optimierter Bildkompression und einem auf meine Ästhetik abgestimmten Layout. Aktuell in Weiterentwicklung.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">Vercel</span>
-          </div>
+        <div class="skill-row reveal">
+          <div class="skill-cat">Backend & OOP</div>
+          <div class="skill-vals">C#, Java / JavaFX, Python, Node.js</div>
         </div>
-
-        <div class="project">
-          <div class="project-top">
-            <h3 class="project-name">Schul-Dokumentation</h3>
-            <a href="https://1fi_project.gitlab.io/162/" target="_blank" rel="noopener" class="project-link">Live ansehen &#8599;</a>
-          </div>
-          <div class="project-subtitle">Technische Dokumentation für IMS-Module</div>
-          <p class="project-desc">
-            Eine strukturierte Dokumentationsseite, die Unterrichtsinhalte und Aufgaben aus mehreren IMS-Modulen zusammenfasst — von Datenmodellierung und SQL über UML-Klassendiagramme bis zur objektorientierten Programmierung in C#. Dient als Nachschlagewerk und Lernressource.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">GitLab Pages</span>
-            <span class="tech-tag">Markdown</span>
-            <span class="tech-tag">Static Site Generator</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 03 Kenntnisse -->
-    <section class="section reveal" id="kenntnisse">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title">Kenntnisse</h2>
-      </div>
-      <div class="section-line"></div>
-
-      <div class="skills-grid" style="margin-top: 24px;">
-        <div class="skill-row">
-          <div class="skill-cat">Webentwicklung</div>
-          <div class="skill-items">HTML · CSS · JavaScript · TypeScript · Angular</div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-cat">Backend &amp; OOP</div>
-          <div class="skill-items">C# · JavaFX · Python</div>
-        </div>
-        <div class="skill-row">
+        <div class="skill-row reveal">
           <div class="skill-cat">Datenbanken</div>
-          <div class="skill-items">SQL (DDL, DML, Normalisierung, ERM)</div>
+          <div class="skill-vals">Relationale Datenbanken (SQL, DDL, DML, ERM, Normalisierung)</div>
         </div>
-        <div class="skill-row">
-          <div class="skill-cat">Tools</div>
-          <div class="skill-items">Git · Linux · Docker</div>
+        <div class="skill-row reveal">
+          <div class="skill-cat">Tools & CI/CD</div>
+          <div class="skill-vals">Git, GitHub, GitLab CI/CD, Linux, Docker, Vercel</div>
         </div>
-        <div class="skill-row">
-          <div class="skill-cat">Weitere</div>
-          <div class="skill-items">KI-Grundlagen · REST APIs · Vercel · GitLab CI/CD</div>
-        </div>
-        <div class="skill-row">
+        <div class="skill-row reveal">
           <div class="skill-cat">Sprachen</div>
-          <div class="skill-items">Ukrainisch (Muttersprache) · Deutsch B2 · Englisch B2 · Französisch A2</div>
+          <div class="skill-vals">Ukrainisch (Muttersprache / C2), Deutsch (B2), Englisch (B2), Französisch (A2)</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 04 Motivation -->
-    <section class="section reveal" id="motivation">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2 class="section-title">Motivation</h2>
-      </div>
-      <div class="section-line"></div>
-
-      <div class="motivation-text" style="margin-top: 28px;">
-        <p>
-          Was mich antreibt, geht über den Lehrplan hinaus: Ich baue Projekte, die echte Probleme lösen, organisiere seit zwei Jahren die «Notebookdays» für neue Schülerinnen und Schüler und setze mich intensiv mit den Möglichkeiten von KI auseinander.
+  <!-- CONTACT -->
+  <section id="kontakt">
+    <div class="container section-pad">
+      <div class="label reveal">05 / Kontakt</div>
+      <div class="contact-block">
+        <h2 class="section-heading reveal">Interesse an einer <em>Zusammenarbeit?</em></h2>
+        <a href="mailto:olha.vilkhova47@gmail.com" class="contact-email reveal">olha.vilkhova47@gmail.com</a>
+        <p class="contact-note reveal">
+          Ich bin auf der Suche nach einem Jahrespraktikum im Bereich Applikationsentwicklung ab August 2027. Ich freue mich über Ihre Kontaktaufnahme.
         </p>
-        <p style="margin-top: 16px;">
-          Im Praktikum suche ich die Chance, mein Wissen in einem professionellen Umfeld einzusetzen, von erfahrenen Entwicklerinnen und Entwicklern zu lernen und herauszufinden, wo ich in einem Team den grössten Beitrag leisten kann.
-        </p>
+        <div class="reveal">
+          <a href="mailto:olha.vilkhova47@gmail.com" class="btn-fill">E-Mail schreiben</a>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 05 Kontakt -->
-    <section class="section reveal" id="kontakt">
-      <div class="section-header">
-        <span class="section-num">05</span>
-        <h2 class="section-title">Kontakt</h2>
-      </div>
-      <div class="section-line"></div>
-
-      <div style="margin-top: 28px;">
-        <a href="mailto:olha.vilkhova47@gmail.com" class="contact-email">olha.vilkhova47@gmail.com</a>
-        <p class="contact-note">Ich freue mich über eine Nachricht — gerne auch für ein persönliches Gespräch.</p>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-line"></div>
-      Olha Vilkhova · St. Gallen · 2026
-    </footer>
-
-  </div>
+  <footer>
+    <span class="footer-text">© 2026 OLHA VILKHOVA — ALL RIGHTS RESERVED</span>
+    <a href="#" class="footer-link">NACH OBEN ↑</a>
+  </footer>
 
   <script>
-    // Theme toggle logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
-
-    // Scroll reveal
+    // Scroll reveal animation
+    const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('nav-mobile-open'));
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+    });
+
+    // Minimal Canvas Particles Animation (B&W subtle floating light)
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse interaction for interactive constellation
+    const mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 2 + 0.8;
+        this.alpha = Math.random() * 0.5 + 0.3;
+      }
+      update() {
+        // Normal floating movement
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap around edges
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+
+        // Interactive mouse reaction (push gently away from cursor)
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 0) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            const dirX = dx / dist;
+            const dirY = dy / dist;
+            this.x -= dirX * force * 4;
+            this.y -= dirY * force * 4;
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    for (let i = 0; i < 110; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw clear connecting constellation lines between particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+
+        // Draw interactive lines connecting cursor to nearby stars
+        if (mouse.x !== null && mouse.y !== null) {
+          const mdx = mouse.x - particles[i].x;
+          const mdy = mouse.y - particles[i].y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < mouse.radius) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.45 * (1 - mdist / mouse.radius)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
 </body>
 </html>
