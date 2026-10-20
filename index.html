@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,318 +8,12 @@
   <link rel="shortcut icon" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #070709;
-      --bg2: #0e0e12;
-      --surface: rgba(255,255,255,0.04);
-      --border: rgba(255, 255, 255, 0.14);
-      --text: #ffffff;
-      --text2: #e2e8f0;
-      --text3: #94a3b8;
-      --mono: 'Space Mono', monospace;
-      --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* Canvas Background */
-    #bg-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 1;
-    }
-
-    header, section, footer, nav { position: relative; z-index: 1; }
-
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--text3); }
-
-    /* Navigation */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 64px;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 64px;
-      background: rgba(7, 7, 9, 0.9);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--mono); font-size: 14px; font-weight: 700;
-      color: var(--text); text-decoration: none; letter-spacing: 0.1em;
-    }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a {
-      font-family: var(--sans); font-size: 13px; font-weight: 500;
-      color: var(--text2); text-decoration: none; letter-spacing: 0.05em;
-      text-transform: uppercase; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      font-size: 12px; font-family: var(--mono); font-weight: 700;
-      padding: 8px 18px; border: 1px solid var(--text2);
-      color: var(--text); text-decoration: none; transition: all 0.2s;
-    }
-    .nav-cta:hover { background: var(--text); color: var(--bg); }
-
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center; gap: 5px;
-      width: 32px; height: 32px; cursor: pointer; background: none; border: none; z-index: 1001;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 2px; background: var(--text);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    /* Mobile Overlay Menu */
-    .mobile-menu {
-      display: none;
-      position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
-      background: #070709;
-      flex-direction: column; justify-content: center; align-items: center; gap: 28px;
-      z-index: 999; padding: 40px;
-    }
-    .mobile-menu a {
-      font-family: var(--sans); font-size: 22px; font-weight: 600;
-      color: var(--text2); text-decoration: none; text-transform: uppercase;
-      letter-spacing: 0.08em; transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--text); }
-
-    body.menu-open .mobile-menu { display: flex; }
-    body.menu-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    body.menu-open .hamburger span:nth-child(2) { opacity: 0; }
-    body.menu-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 64px 90px; max-width: 1140px; margin: 0 auto;
-    }
-    .hero-eyebrow {
-      font-family: var(--mono); font-size: 12px; font-weight: 700;
-      color: var(--text3); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 24px;
-    }
-    .hero-name {
-      font-size: clamp(52px, 8.5vw, 120px); font-weight: 300; line-height: 0.95;
-      letter-spacing: -0.04em; color: var(--text);
-    }
-    .hero-name strong { font-weight: 300; }
-    .scramble-olha, .scramble-vilkhova {
-      display: inline-block;
-      contain: layout style;
-      will-change: contents;
-    }
-    .hero-divider { width: 48px; height: 2px; background: var(--text3); margin: 32px 0; }
-    .hero-role {
-      font-size: 17px; font-weight: 400; color: var(--text2);
-      max-width: 520px; line-height: 1.75;
-    }
-    .hero-btns { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
-    .btn-fill {
-      padding: 14px 32px; background: var(--text); color: var(--bg);
-      font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity 0.2s;
-    }
-    .btn-fill:hover { opacity: 0.85; }
-    .btn-ghost {
-      padding: 14px 32px; border: 1px solid var(--border); color: var(--text2);
-      font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
-
-    /* Common Sections */
-    section { position: relative; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 64px; }
-    .section-pad { padding: 130px 0; }
-
-    .label {
-      font-family: var(--mono); font-size: 12px; font-weight: 700;
-      color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
-      margin-bottom: 40px; display: flex; align-items: center; gap: 16px;
-    }
-    .label::before { content: ''; width: 32px; height: 1px; background: var(--text3); }
-
-    .section-heading {
-      font-size: clamp(32px, 4vw, 54px); font-weight: 400;
-      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 64px; color: var(--text2);
-    }
-    .section-heading em { font-style: normal; font-weight: 700; color: var(--text); }
-
-    /* About Section */
-    .about-grid { display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center; }
-    .about-text { font-size: 17px; font-weight: 400; color: var(--text2); line-height: 1.8; }
-    .about-text p + p { margin-top: 20px; }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    
-    .about-img-wrap {
-      position: relative; width: 100%; max-width: 360px; margin: 0 auto;
-      perspective: 1000px; cursor: pointer; user-select: none;
-    }
-    .flip-card {
-      position: relative; width: 100%; padding-bottom: 125%; border-radius: 12px;
-    }
-    .flip-card-inner {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .about-img-wrap.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-card-face {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      backface-visibility: hidden; -webkit-backface-visibility: hidden;
-      border-radius: 12px; border: 1px solid var(--border); overflow: hidden;
-      background: var(--bg2); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-    }
-    .flip-card-face img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.4s;
-    }
-    .flip-card-front { transform: rotateY(0deg); }
-    .flip-card-back { transform: rotateY(180deg); }
-    .about-img-wrap:hover .flip-card-face img { transform: scale(1.03); }
-    
-    .flip-hint {
-      position: absolute; top: 14px; right: 14px;
-      font-family: var(--mono); font-size: 10px; font-weight: 700;
-      color: #ffffff; background: rgba(10, 10, 14, 0.92);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      padding: 5px 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.3);
-      display: flex; gap: 6px; align-items: center; z-index: 10;
-      white-space: nowrap; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85);
-      pointer-events: none; letter-spacing: 0.06em;
-      transform: rotate(6deg);
-      transition: all 0.25s ease;
-    }
-    .about-img-wrap:hover .flip-hint {
-      border-color: #ffffff; background: #070709;
-      transform: rotate(6deg) scale(1.08);
-    }
-
-    .stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border); margin-top: 56px; border: 1px solid var(--border);
-      border-radius: 8px; overflow: hidden;
-    }
-    .stat { background: var(--bg); padding: 24px 16px; text-align: center; }
-    .stat-num { font-size: 38px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-    .stat-lbl { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
-
-    /* Timeline Section */
-    .tl { border-top: 1px solid var(--border); }
-    .tl-row {
-      display: grid; grid-template-columns: 220px 1fr; gap: 24px;
-      border-bottom: 1px solid var(--border); padding: 32px 0; align-items: start;
-      transition: background 0.2s;
-    }
-    .tl-row:hover { background: var(--surface); }
-    .tl-date { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text3); letter-spacing: 0.06em; padding-top: 4px; }
-    .tl-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .tl-role { font-size: 14px; color: var(--text2); font-weight: 500; margin-bottom: 6px; }
-    .tl-desc { font-size: 14px; color: var(--text3); font-weight: 400; line-height: 1.6; }
-
-    /* Projects Section */
-    .proj-list { border-top: 1px solid var(--border); }
-    .proj-row {
-      display: grid; grid-template-columns: 48px 1fr auto;
-      gap: 32px; align-items: start;
-      border-bottom: 1px solid var(--border);
-      padding: 40px 0;
-      transition: background 0.2s;
-    }
-    .proj-row:hover { background: var(--surface); }
-    .proj-num { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text3); padding-top: 6px; }
-    .proj-name { font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-    .proj-sub { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 0.08em; margin-bottom: 16px; }
-    .proj-desc { font-size: 15px; color: var(--text2); line-height: 1.7; font-weight: 400; max-width: 580px; margin-bottom: 20px; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag { font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 4px 12px; border: 1px solid var(--border); color: var(--text2); background: rgba(255,255,255,0.02); }
-    .proj-link { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--text); text-decoration: none; white-space: nowrap; padding-top: 6px; transition: opacity 0.2s; }
-    .proj-link:hover { opacity: 0.7; }
-
-    /* Skills Section */
-    .skills-table { border-top: 1px solid var(--border); }
-    .skill-row { display: grid; grid-template-columns: 220px 1fr; border-bottom: 1px solid var(--border); padding: 28px 0; align-items: start; }
-    .skill-cat { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 4px; }
-    .skill-vals { font-size: 15px; color: var(--text2); font-weight: 400; line-height: 1.7; }
-
-    /* Contact Section */
-    .contact-block { max-width: 700px; }
-    .contact-email {
-      font-size: clamp(22px, 4.5vw, 44px); font-weight: 500; color: var(--text);
-      text-decoration: none; letter-spacing: -0.01em; display: inline-block;
-      margin-bottom: 32px; transition: opacity 0.2s; border-bottom: 1px solid var(--border); padding-bottom: 8px;
-    }
-    .contact-email:hover { opacity: 0.8; }
-    .contact-note { font-size: 15px; color: var(--text2); font-weight: 400; line-height: 1.75; margin-bottom: 40px; }
-
-    footer {
-      border-top: 1px solid var(--border); padding: 48px 64px;
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 1140px; margin: 0 auto;
-    }
-    .footer-text { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text3); letter-spacing: 0.06em; }
-    .footer-link { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text2); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-    .footer-link:hover { color: var(--text); }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 900px) {
-      nav { padding: 0 36px; }
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
-      .hero { padding: 125px 36px 70px; min-height: auto; }
-      .hero-name { font-size: clamp(44px, 12vw, 72px); }
-      .hero-role { font-size: 15px; }
-
-      .container { padding: 0 36px; }
-      .section-pad { padding: 90px 0; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-img-wrap { max-width: 290px; margin: 0 auto 40px; }
-
-      .stats { grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
-      .stat { padding: 16px 8px; }
-      .stat-num { font-size: 28px; }
-      .stat-lbl { font-size: 9px; }
-
-      .tl-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
-      .proj-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
-      .proj-link { align-self: auto; margin-top: 8px; }
-      .skill-row { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
-
-      footer { padding: 40px 36px; flex-direction: column; gap: 16px; text-align: center; }
-    }
-
-    @media (max-width: 550px) {
-      nav { padding: 0 32px; }
-      .hero { padding: 120px 32px 64px; }
-      .container { padding: 0 32px; }
-      footer { padding: 36px 32px; }
-      .btn-fill, .btn-ghost { width: 100%; text-align: center; }
-      .stats { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <canvas id="bg-canvas"></canvas>
 
@@ -373,13 +68,25 @@
         <div class="reveal">
           <h2 class="section-heading">Kreativ. Präzise.<br><em>Fokussiert.</em></h2>
           <div class="about-text">
-            <p>Vor vier Jahren verliess ich die Ukraine und fand in <strong>St. Gallen</strong> eine neue Heimat. In der Informatik entdeckte ich eine Leidenschaft, bei der mathematische Logik und gestalterische Kreativität perfekt verschmelzen.</p>
-            <p>Heute entwickle ich moderne Webanwendungen, beschäftige mich intensiv mit <strong>KI-Integration</strong> und organisiere die jährlichen «Notebookdays» für neue Schülerinnen und Schüler an meiner Schule.</p>
+            <p>Vor vier Jahren verliess ich die Ukraine und fand in <strong>St. Gallen</strong> eine neue Heimat. In der
+              Informatik entdeckte ich eine Leidenschaft, bei der mathematische Logik und gestalterische Kreativität
+              perfekt verschmelzen.</p>
+            <p>Heute entwickle ich moderne Webanwendungen, beschäftige mich intensiv mit <strong>KI-Integration</strong>
+              und organisiere die jährlichen «Notebookdays» für neue Schülerinnen und Schüler an meiner Schule.</p>
           </div>
           <div class="stats reveal">
-            <div class="stat"><div class="stat-num">4.6</div><div class="stat-lbl">Notenschnitt</div></div>
-            <div class="stat"><div class="stat-num">3+</div><div class="stat-lbl">Projekte</div></div>
-            <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Sprachen</div></div>
+            <div class="stat">
+              <div class="stat-num">2027</div>
+              <div class="stat-lbl">Praktikum ab</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3+</div>
+              <div class="stat-lbl">Projekte</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4</div>
+              <div class="stat-lbl">Sprachen</div>
+            </div>
           </div>
         </div>
         <div class="about-img-wrap reveal">
@@ -412,7 +119,7 @@
           <div>
             <div class="tl-name">IMS Kantonsschule am Brühl</div>
             <div class="tl-role">Informatikerin Applikationsentwicklung</div>
-            <div class="tl-desc">Notendurchschnitt 4.6 · Definitiv promoviert · 0 ungenügende Noten</div>
+            <div class="tl-desc">Schwerpunkt Applikationsentwicklung & Webtechnologien · Definitiv promoviert</div>
           </div>
         </div>
         <div class="tl-row reveal">
@@ -440,10 +147,10 @@
           </div>
         </div>
         <div class="tl-row reveal">
-          <div class="tl-date">2014 – 2022</div>
+          <div class="tl-date">2014 – 2025</div>
           <div>
             <div class="tl-name">Schule in der Ukraine</div>
-            <div class="tl-role">Allgemeinbildung</div>
+            <div class="tl-role">Allgemeinbildung (letzte 3 Jahren online abgeschlossen)</div>
           </div>
         </div>
       </div>
@@ -460,10 +167,12 @@
           <div class="proj-num">01</div>
           <div>
             <div class="proj-name">ChronoCoach</div>
-            <div class="proj-sub">KI-GESTÜTZTER LERNPLANER</div>
-            <div class="proj-desc">Webanwendung mit integriertem KI-Coach zur automatischen Generierung von strukturierten Lern- und Wochenplänen basierend auf persönlichen Energieleveln.</div>
+            <div class="proj-sub">KI-GESTÜTZTER LERNPLANER (Im Bearbeitung)</div>
+            <div class="proj-desc">Webanwendung mit integriertem KI-Coach zur automatischen Generierung von
+              strukturierten Lern- und Wochenplänen basierend auf persönlichen Energieleveln.</div>
             <div class="proj-tags">
-              <span class="tag">REACT</span><span class="tag">JAVASCRIPT</span><span class="tag">REST API</span><span class="tag">GEMINI AI</span><span class="tag">VERCEL</span>
+              <span class="tag">REACT</span><span class="tag">JAVASCRIPT</span><span class="tag">REST API</span><span
+                class="tag">GEMINI AI</span><span class="tag">VERCEL</span>
             </div>
           </div>
           <a href="https://chronocoach-nine.vercel.app/" target="_blank" rel="noopener" class="proj-link">LIVE ↗</a>
@@ -473,19 +182,23 @@
           <div>
             <div class="proj-name">Foto-Portfolio</div>
             <div class="proj-sub">PERSÖNLICHE GALERIE-WEBSITE</div>
-            <div class="proj-desc">Minimalistische Fotoseite mit automatischer Bildsynchronisation und optimierter Kompression via Node.js Build-Skript.</div>
+            <div class="proj-desc">Minimalistische Fotoseite mit automatischer Bildsynchronisation und optimierter
+              Kompression via Node.js Build-Skript.</div>
             <div class="proj-tags">
-              <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JAVASCRIPT</span><span class="tag">NODE.JS</span><span class="tag">VERCEL</span>
+              <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JAVASCRIPT</span><span
+                class="tag">NODE.JS</span><span class="tag">VERCEL</span>
             </div>
           </div>
-          <a href="https://my-photo-portfolio-olkus.vercel.app/" target="_blank" rel="noopener" class="proj-link">LIVE ↗</a>
+          <a href="https://my-photo-portfolio-olkus.vercel.app/" target="_blank" rel="noopener" class="proj-link">LIVE
+            ↗</a>
         </div>
         <div class="proj-row reveal">
           <div class="proj-num">03</div>
           <div>
             <div class="proj-name">Schul-Dokumentation</div>
             <div class="proj-sub">TECHNISCHES REPOSITORY</div>
-            <div class="proj-desc">Umfassende Dokumentation von Unterrichtsinhalten der IMS-Module (SQL, UML, C# OOP, Datenmodellierung).</div>
+            <div class="proj-desc">Umfassende Dokumentation von Unterrichtsinhalten der IMS-Module (SQL, UML, C# OOP,
+              Datenmodellierung).</div>
             <div class="proj-tags">
               <span class="tag">GITLAB PAGES</span><span class="tag">MARKDOWN</span><span class="tag">STATIC SITE</span>
             </div>
@@ -534,7 +247,8 @@
         <h2 class="section-heading reveal">Interesse an einer <em>Zusammenarbeit?</em></h2>
         <a href="mailto:olha.vilkhova47@gmail.com" class="contact-email reveal">olha.vilkhova47@gmail.com</a>
         <p class="contact-note reveal">
-          Ich bin auf der Suche nach einem Jahrespraktikum im Bereich Applikationsentwicklung ab August 2027. Ich freue mich über Ihre Kontaktaufnahme.
+          Ich bin auf der Suche nach einem Jahrespraktikum im Bereich Applikationsentwicklung ab August 2027. Ich freue
+          mich über Ihre Kontaktaufnahme.
         </p>
         <div class="reveal">
           <a href="mailto:olha.vilkhova47@gmail.com" class="btn-fill">E-Mail schreiben</a>
@@ -566,7 +280,7 @@
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     hamburger.addEventListener('click', () => {
       document.body.classList.toggle('menu-open');
     });
@@ -798,4 +512,5 @@
     animate();
   </script>
 </body>
+
 </html>
